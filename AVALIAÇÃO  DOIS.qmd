@@ -1,0 +1,55 @@
+---
+title: "Rafael Bruno Vargas"
+format: html
+editor: visual
+---
+
+```{r}
+#| label: load-packages # nomes únicos 
+#| include: false
+
+library(GetBCBData)
+library(tidyverse)
+library(plotly)
+library(hrbrthemes)
+
+
+df.bcb <- gbcbd_get_series(
+  id = 1644,
+  first.date = "1995-01-01"
+)
+
+
+```
+
+```{r}
+#| warning: false
+#| echo: false
+
+# fazendo gráfico de linhas mais mapa
+p <- df.bcb %>%
+  ggplot( aes(x=ref.date, y=value)) +
+  geom_area(fill="#69b3a2", alpha=0.5) +
+  geom_line(color="#69b3a2") +
+  ylab("Endividamento das famílias %") +
+  theme_ipsum() +
+  labs(
+    title = "Taxa de Endividamento das Famílias Brasileiras (2012 - 2025)"
+  )
+
+# Turn it interactive with ggplotly
+p <- ggplotly(p)
+p
+```
+
+## VARIÁVEL
+
+### **Taxa de Endividamento das Famílias Brasileiras**
+
+A taxa de endividamento das famílias brasileiras é um indicador macroeconômico que mede o grau de comprometimento da renda familiar com dívidas financeiras. Esse indicador é calculado pela razão entre o total das dívidas das famílias e a sua renda acumulada nos últimos 12 meses, sendo expressa em percentual.
+
+Esse dado é acompanhado e divulgado periodicamente pelo Banco Central do Brasil (BCB). Ele reflete o comportamento do consumo, a capacidade de pagamento das famílias e o impacto do crédito na economia. Uma taxa elevada pode indicar que as famílias estão altamente expostas a compromissos financeiros, o que pode reduzir sua capacidade de consumo e aumentar o risco de inadimplência. Por outro lado, uma taxa controlada sugere maior equilíbrio entre dívida e renda, possibilitando maior estabilidade econômica e poder de compra.
+
+Diversos fatores influenciam a variação dessa taxa ao longo do tempo, como mudanças na taxa de juros, nível de emprego, facilidade de acesso ao crédito, e cenários de instabilidade econômica. Em momentos de crescimento econômico e juros mais baixos, há uma tendência de aumento no endividamento, pois as famílias se sentem mais confiantes para consumir e tomar crédito. Já em períodos de crise ou alta da taxa Selic, observa-se uma retração no endividamento por conta da perda de poder aquisitivo e maior cautela dos consumidores.
+
+Este indicador é fundamental para análises econômicas, pois permite avaliar a saúde financeira das famílias e o potencial de crescimento da demanda interna no país. Além disso, é utilizado como subsídio para a formulação de políticas públicas e decisões de política monetária por parte do governo e do Banco Central.
